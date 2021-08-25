@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>俺のアウトドア</title>
+    <link rel="stylesheet" href="css/reset.css">
+    <link rel="stylesheet" href="css/common.css">
+    <link rel="stylesheet" href="css/login.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.1/css/all.css">
+    <style>
+        .back-btn {
+            position: relative;
+            top: 50px;
+            left: 30px;
+            font-weight: bold;
+            padding: 10px 20px;
+            background-color: #375a42;
+            color: #eee;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px #aaa;
+        }
+        .card {
+            position: relative;
+            top: 100px;
+            width: 350px;
+            margin: auto;
+            background: #fff;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px #aaa;
+            animation: SlideIn 0.8s;
+        }
+        @keyframes SlideIn {
+            0% {
+                opacity: 0;
+                transform: translateX(20px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+        .card-img {
+            border-radius: 5px 5px 0 0;
+            max-width: 100%;
+            height: auto;
+        }
+        .card-content {
+            padding: 20px;
+            font-size: 14px;
+        }
+        .card-timestamp {
+            margin-bottom: 20px;
+            text-align: end;
+            color: #666;
+        }
+        .card-text {
+            color: #333;
+            line-height: 1.5;
+            margin: 5px;
+        }
+        .card-hashtag {
+            color: #3a57cd;
+            line-height: 1.5;
+            margin: 5px;
+        }
+        .card-link {
+            text-align: center;
+            padding: 10px;
+        }
+        .card-link a {
+            text-decoration: none;
+            color: #0bd;
+            margin: 0 10px;
+        }
+        .card-link a:hover {
+            color: #0090aa;
+        }
+        .card-author {
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+            color: #333;
+            border-top: 1px solid #ddd;
+            text-align: end;
+            padding-top: 10px;
+        }
+        .card-author img {
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            background-position: left top;
+            padding-right: 5px;
+        }
+        .LikesIcon-fa-heart{
+            font-size: 30px;
+        }
+    </style>
+  </head>
+  <body>
+    <div class="background">
+      <div class="app-wrapper">
+        <a href="#" class="back-btn">
+            <i class="fa fa-chevron-left"></i>
+            BACK
+        </a>
+        <section class="card">
+            <img class="card-img"
+                src="image/ahijo.jpg"
+                alt="アヒージョ">
+            <div class="card-content">
+                <div style="display: flex; align-items: center; justify-content: space-between;">
+                    <div>
+                        <i class="far fa-heart LikesIcon-fa-heart"></i>
+                    </div>
+                    <p class="card-timestamp">2021/08/25</p>
+                </div>
+                <p class="card-text">
+                    アヒージョを作りました！
+                    自家製のアンチョビを加えたことがポイントです！
+                </p>
+                <p class="card-hashtag">
+                    #アヒージョ #アンチョビ #バケット #アヒージョ鍋
+                </p>
+                <p class="card-link">
+                    <a href="https://www.amazon.co.jp/%E3%82%B9%E3%82%BA%E6%9C%A8-%E7%89%87%E6%89%8B%E9%8D%8B-%E3%83%96%E3%83%A9%E3%83%83%E3%82%AF-%E5%B0%8F-7138-4325/dp/B075T23CXD/ref=asc_df_B075T23CXD/?tag=jpgo-22&linkCode=df0&hvadid=266498411432&hvpos=&hvnetw=g&hvrand=5038692547287392965&hvpone=&hvptwo=&hvqmt=&hvdev=c&hvdvcmdl=&hvlocint=&hvlocphy=1009461&hvtargid=pla-441433847401&psc=1&th=1&psc=1">
+                    スズ木さんのアヒージョ鍋</a>
+                </p>
+                <p class="card-author">
+                    <img src="image/gray-circle.png"
+                    alt="アイコン">
+                    アウトドア太郎
+                </p>
+            </div>
+            
+        </section>
+
+      </div>
+    </div>
+
+  </body>
+  </html>
