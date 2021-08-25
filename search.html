@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>俺のアウトドア</title>
+    <link rel="stylesheet" href="css/reset.css">
+    <link rel="stylesheet" href="css/common.css">
+    <link rel="stylesheet" href="css/login.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.1/css/all.css">
+    <style>
+        .search_container{
+        box-sizing: border-box;
+        position: relative;
+        border: 1px solid #999;
+        padding: 3px 10px;
+        border-radius: 20px;
+        height: 2.3em;
+        width: 300px;
+        top: 20px;
+        margin: auto;
+        overflow: hidden;
+        background-color: white;
+        }
+        .search_container input[type="text"]{
+        border: none;
+        height: 2.0em;
+        }
+        .search_container input[type="text"]:focus {
+        outline: 0;
+        }
+        .search_container button[type="submit"]{
+        cursor: pointer;
+        font-family: FontAwesome;
+        font-size: 1.3em;
+        border: none;
+        background: none;
+        color: #7fbfff;
+        position: absolute;
+        width: 2.5em;
+        height: 2.5em;
+        right: 0;
+        top: -10px;
+        outline : none;
+        }
+        .search_container button[type="submit"]:hover{
+            color: #7795b3;
+        }
+        .card {
+            position: relative;
+            top: 20px;
+            margin: 40px auto;
+            width: 350px;
+            height: 180px;
+            background: #fff;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px #aaa;
+            animation: SlideIn 0.8s;
+            display: flex;
+        }
+        @keyframes SlideIn {
+            0% {
+                opacity: 0;
+                transform: translateX(20px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+        .card img {
+          position: absolute;
+          max-width: 50%;
+          width: 100%;
+          height: 100%;
+          top: 0;
+          right: 0;
+          bottom: 0;
+          left: 0;
+          margin-right: auto;
+          object-fit: cover;
+        }
+        .card-content {
+          padding: 10px;
+          font-size: 8px;
+          max-width: 45%;
+          margin-left: auto;
+        }
+        .card-text {
+            color: #333;
+            line-height: 1.5;
+            margin: 5px;
+        }
+        .card-hashtag {
+            color: #3a57cd;
+            line-height: 1.5;
+            margin: 5px;
+        }
+    </style>
+  </head>
+  <body>
+    <div class="background">
+      <div class="app-wrapper">
+        <form method="get" action="#" class="search_container">
+            <input type="text" size="25" placeholder="キーワード・タグ検索">
+            <button type="submit"><i class="fas fa-search"></i></button>
+        </form>
+        <section class="card">
+          <img src="image/ahijo.jpg" alt="アヒージョ">
+          <div class="card-content">
+            <p class="card-text">
+              アヒージョを作りました！
+              自家製のアンチョビを加えたことがポイントです！
+            </p>
+            <p class="card-hashtag">
+              #アヒージョ #アンチョビ #バケット #アヒージョ鍋
+            </p>
+          </div>
+        </section>
+        <section class="card">
+          <img src="image/pepper-lunch.jpg" alt="ペッパーランチ">
+        </section>
+        <section class="card">
+          <img src="image/bbq.png" alt="バーベキュー">
+        </section>
+      </div>
+    </div>
+
+  </body>
+  </html>
