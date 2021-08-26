@@ -3,6 +3,7 @@ window.addEventListener("load", async function () {
   scanUser()
   // putUser()
   searchUser()
+  inclementUsersPoint()
 
 });
 
@@ -45,7 +46,7 @@ function putUser() {
       age: 20,
       image: "さんぷる画像です",
       password: "qwerty",
-      point: 334,
+      point: 344,
       profile: "てすと　する　あらい",
       user_name: "オニャンコポン",
     }
@@ -84,10 +85,42 @@ function searchUser() {
   })
     .then(response => response.json())
     .then(data => {
-      // 検索結果が複数の場合も対応できる
-      data.Items.forEach( function (item) {
+      // 検索結果が複数の場合も対応できる。これは投稿で使う
+      data.Items.forEach(function (item) {
         console.log('検索結果', item.user_name);
       });
+    })
+    .catch((error) => {
+      console.error('Error:', error);
+    });
+}
+
+function inclementUsersPoint() {
+  console.log("ユーザー更新")
+  // 実装するときは投稿のuserIDでuserTableを検索して、
+  // それの情報全部持ってきて、pointだけ+10してputする処理を書けばいける。
+  const dataOfPut = {
+    OperationType: 'PUT',
+    Keys: {
+      userID: "005",// partation
+      age: 20,
+      image: "さんぷる画像です",
+      password: "qwerty",
+      point: 354 + 10,
+      profile: "てすと　する　あらい",
+      user_name: "オニャンコポン",
+    }
+  };
+
+  fetch('https://s2cuqw4kb4.execute-api.ap-northeast-1.amazonaws.com/intern-groupB-usertable/usertable', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(dataOfPut),
+  })
+    .then(response => {
+      console.log(response)
     })
     .catch((error) => {
       console.error('Error:', error);
