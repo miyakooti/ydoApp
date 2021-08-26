@@ -16,7 +16,17 @@ window.addEventListener("load", async function () {
 
     .then(response => response.json())
     .then(data => {
-      console.log('Success:', data);
+      // jsonのデータ使ってやりたい処理
+      // console.log('Success:', data);
+      console.log(data.Items)
+      data.Items.forEach(function (item) {
+        // <li></li>をつくる
+        const list = document.createElement("li");
+        list.innerText = item.profile;
+
+        // それをhtmlファイルのulタグの中にぶちこむ
+        lists.appendChild(list);
+      });
     })
     .catch((error) => {
       console.error('Error:', error);
