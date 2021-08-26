@@ -1,23 +1,26 @@
-const lists = document.getElementById("lists");
-
 window.addEventListener("load", async function () {
 
-    // サーバへ送りたいデータ
-    const data = {OperationType:'SCAN'};
+  scanUser()
+  // putUser()
+  searchUser()
 
-    fetch('https://s2cuqw4kb4.execute-api.ap-northeast-1.amazonaws.com/intern-groupB-usertable/usertable', {
-      mode: 'cors',
-      method: 'POST', // or 'PUT'
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(data),
-    })
+});
+
+function scanUser() {
+  console.log("ユーザー一覧取得")
+  const lists = document.getElementById("lists");
+  const dataOfScan = { OperationType: 'SCAN', };
+  fetch('https://s2cuqw4kb4.execute-api.ap-northeast-1.amazonaws.com/intern-groupB-usertable/usertable', {
+    method: 'POST', // or 'PUT'
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(dataOfScan),
+  })
 
     .then(response => response.json())
     .then(data => {
       // jsonのデータ使ってやりたい処理
-      // console.log('Success:', data);
       console.log(data.Items)
       data.Items.forEach(function (item) {
         // <li></li>をつくる
@@ -31,49 +34,62 @@ window.addEventListener("load", async function () {
     .catch((error) => {
       console.error('Error:', error);
     });
-});
+}
 
+function putUser() {
+  console.log("ユーザー追加")
+  const dataOfPut = {
+    OperationType: 'PUT',
+    Keys: {
+      userID: "005",// partation
+      age: 20,
+      image: "さんぷる画像です",
+      password: "qwerty",
+      point: 334,
+      profile: "てすと　する　あらい",
+      user_name: "オニャンコポン",
+    }
+  };
 
-// window.addEventListener("load", async function () {
+  console.log("ユーザー新規作成のテスト")
+  fetch('https://s2cuqw4kb4.execute-api.ap-northeast-1.amazonaws.com/intern-groupB-usertable/usertable', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(dataOfPut),
+  })
+    .then(response => {
+      console.log(response)
+    })
+    .catch((error) => {
+      console.error('Error:', error);
+    });
+}
 
-//     // サーバへ送りたいデータ
-//     const data = {OperationType:"SCAN"};
+function searchUser() {
+  console.log("ユーザー検索")
+  const jsonData = {
+    OperationType: 'QUERY', Keys: {
+      userID: "004"
+    }
+  }
 
-//     // FetchAPIのオプション準備
-//     const param = {
-//         method: "POST",
-//         headers: {
-//             "Content-Type": "application/json; charset=utf-8"
-//         },
-//         // リクエストボディ
-//         body: JSON.stringify(data)
-//     };
-
-//     // paramを付ける以外はGETと同じ
-//     fetch("https://s2cuqw4kb4.execute-api.ap-northeast-1.amazonaws.com/intern-groupB-usertable/usertable", param)
-//         .then((response) => {
-//             console.log(response)
-//             return (res.json());
-//         })
-//         .then((json) => {
-//             // ここに何らかの処理
-//             console.log(json)
-//         });
-// });
-
-
-// window.addEventListener("load", async function () {
-
-//     const res = await fetch("https://jsonplaceholder.typicode.com/users");
-//     const users = await res.json();
-
-//     users.forEach(function (user) {
-
-//         // <li></li>をつくる
-//         const list = document.createElement("li");
-//         list.innerText = user.name;
-
-//         // それをhtmlファイルのulタグの中にぶちこむ
-//         lists.appendChild(list);
-//     });
-// });
+  fetch('https://s2cuqw4kb4.execute-api.ap-northeast-1.amazonaws.com/intern-groupB-usertable/usertable', {
+    method: 'POST', // or 'PUT'
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(jsonData),
+  })
+    .then(response => response.json())
+    .then(data => {
+      // 検索結果が複数の場合も対応できる
+      data.Items.forEach( function (item) {
+        console.log('検索結果', item.user_name);
+      });
+    })
+    .catch((error) => {
+      console.error('Error:', error);
+    });
+}
