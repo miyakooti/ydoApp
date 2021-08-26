@@ -4,14 +4,23 @@
 // ポイント増加させる機能→下の方で未完成のinclementUsersPoint()がある
 // 投稿DBのいいね数増加機能→inclementUsersPoint()を流用　実装ヒントも同じ
 
+
+
+
 window.addEventListener("load", async function () {
 
-  scanUser()
+  scanUser();
   // putUser()
-  searchUser()
-  inclementUsersPoint()
+  inclementUsersPoint();
+  console.log("保存されたuserIDは", returnUserID());
 
 });
+
+document.getElementById("search-button").onclick = function () {
+  console.log("ボタンを押して検索します。")
+  const userID = document.getElementById("userID").value
+  searchUser(userID)
+}
 
 function scanUser() {
   console.log("ユーザー一覧取得")
@@ -75,11 +84,12 @@ function putUser() {
 }
 
 // userIDはinputタグからもってくる　多分ログイン周りやマイページで使う　最悪マイページでも入力させて表示する。
-function searchUser() {
+function searchUser(id) {
   console.log("ユーザー検索")
+  console.log(id)
   const jsonData = {
     OperationType: 'QUERY', Keys: {
-      userID: "004"
+      userID: id
     }
   }
   fetch('https://s2cuqw4kb4.execute-api.ap-northeast-1.amazonaws.com/intern-groupB-usertable/usertable', {
@@ -94,6 +104,7 @@ function searchUser() {
       // 検索結果が複数の場合も対応できる。これは投稿で使う
       data.Items.forEach(function (item) {
         console.log('検索結果', item.user_name);
+        document.getElementById("userIDLabel").innerText = item.user_name
       });
     })
     .catch((error) => {
@@ -101,8 +112,8 @@ function searchUser() {
     });
 }
 
-  // 実装するときは投稿のuserIDでuserTableを検索して、
-  // それの情報全部持ってきて、pointだけ+10してputする処理を書けばいける。
+// 実装するときは投稿のuserIDでuserTableを検索して、
+// それの情報全部持ってきて、pointだけ+10してputする処理を書けばいける。
 function inclementUsersPoint() {
   console.log("ユーザー更新")
   const jsonData = {
@@ -131,4 +142,10 @@ function inclementUsersPoint() {
     .catch((error) => {
       console.error('Error:', error);
     });
+}
+
+function returnUserID() {
+  window.sessionStorage.setItem("userID", "004")
+  const userID = window.sessionStorage.getItem("userID");
+  return userID
 }
