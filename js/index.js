@@ -1,3 +1,9 @@
+// 投稿一覧取得→scanUser()を流用
+// 投稿する機能→putUser()を流用
+// 投稿を検索する機能→searchUser()を流用
+// ポイント増加させる機能→下の方で未完成のinclementUsersPoint()がある
+// 投稿DBのいいね数増加機能→inclementUsersPoint()を流用　実装ヒントも同じ
+
 window.addEventListener("load", async function () {
 
   scanUser()
@@ -10,13 +16,13 @@ window.addEventListener("load", async function () {
 function scanUser() {
   console.log("ユーザー一覧取得")
   const lists = document.getElementById("lists");
-  const dataOfScan = { OperationType: 'SCAN', };
+  const jsonData = { OperationType: 'SCAN', };
   fetch('https://s2cuqw4kb4.execute-api.ap-northeast-1.amazonaws.com/intern-groupB-usertable/usertable', {
     method: 'POST', // or 'PUT'
     headers: {
       'Content-Type': 'application/json',
     },
-    body: JSON.stringify(dataOfScan),
+    body: JSON.stringify(jsonData),
   })
 
     .then(response => response.json())
@@ -37,9 +43,10 @@ function scanUser() {
     });
 }
 
+// ユーザー情報はinputタグからもってくる
 function putUser() {
   console.log("ユーザー追加")
-  const dataOfPut = {
+  const jsonData = {
     OperationType: 'PUT',
     Keys: {
       userID: "005",// partation
@@ -52,13 +59,12 @@ function putUser() {
     }
   };
 
-  console.log("ユーザー新規作成のテスト")
   fetch('https://s2cuqw4kb4.execute-api.ap-northeast-1.amazonaws.com/intern-groupB-usertable/usertable', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
     },
-    body: JSON.stringify(dataOfPut),
+    body: JSON.stringify(jsonData),
   })
     .then(response => {
       console.log(response)
@@ -68,6 +74,7 @@ function putUser() {
     });
 }
 
+// userIDはinputタグからもってくる　多分ログイン周りやマイページで使う　最悪マイページでも入力させて表示する。
 function searchUser() {
   console.log("ユーザー検索")
   const jsonData = {
@@ -75,7 +82,6 @@ function searchUser() {
       userID: "004"
     }
   }
-
   fetch('https://s2cuqw4kb4.execute-api.ap-northeast-1.amazonaws.com/intern-groupB-usertable/usertable', {
     method: 'POST', // or 'PUT'
     headers: {
@@ -95,11 +101,11 @@ function searchUser() {
     });
 }
 
-function inclementUsersPoint() {
-  console.log("ユーザー更新")
   // 実装するときは投稿のuserIDでuserTableを検索して、
   // それの情報全部持ってきて、pointだけ+10してputする処理を書けばいける。
-  const dataOfPut = {
+function inclementUsersPoint() {
+  console.log("ユーザー更新")
+  const jsonData = {
     OperationType: 'PUT',
     Keys: {
       userID: "005",// partation
@@ -117,7 +123,7 @@ function inclementUsersPoint() {
     headers: {
       'Content-Type': 'application/json',
     },
-    body: JSON.stringify(dataOfPut),
+    body: JSON.stringify(jsonData),
   })
     .then(response => {
       console.log(response)
