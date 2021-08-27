@@ -1,0 +1,21 @@
+.tab{
+    position: absolute;
+    top: 816px;
+    width: 450px;
+    padding: 2.5% 0;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+  }
+  .tab > *{
+    width:33.3%;
+    background: #fff;
+    font-size: 64px;
+    text-align: center;
+  }
+.tab-content{
+  padding: 5%;
+  background    : #008000; 
+  font-size     : 20pt;      
+  text-align    : center;    
+}
