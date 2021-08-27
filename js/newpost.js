@@ -6,7 +6,7 @@
 
 window.addEventListener("load", async function () {
 
-  scanPost();
+  scanPostAndShowNewestPost();
   // putPost()
   // inclementUsersPoint();
   // console.log("保存されたPostIDは", returnPostID());
@@ -61,7 +61,6 @@ function searchUser(id) {
         const jsonData = {
           OperationType: 'PUT',
           Keys: {
-            postID: "005",
             userID: item.userID,
             user_name: item.userID,
             age: item.age,
@@ -98,7 +97,7 @@ function searchUser(id) {
 }
 
 
-function scanPost() {
+function scanPostAndShowNewestPost() {
   console.log("投稿一覧取得")
   const lists = document.getElementById("lists");
   const jsonData = { OperationType: 'SCAN', };
