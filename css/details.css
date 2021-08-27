@@ -1,0 +1,86 @@
+.back-btn {
+    position: relative;
+    top: 50px;
+    left: 30px;
+    font-weight: bold;
+    padding: 10px 20px;
+    background-color: #64a177;
+    color: #eee;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px #aaa;
+}
+.card {
+    position: relative;
+    top: 100px;
+    width: 350px;
+    margin: auto;
+    background: #fff;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px #aaa;
+    animation: SlideIn 0.8s;
+}
+@keyframes SlideIn {
+    0% {
+        opacity: 0;
+        transform: translateX(20px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+.card img {
+    border-radius: 5px 5px 0 0;
+    max-width: 100%;
+    height: auto;
+}
+.card-content {
+    padding: 20px;
+    font-size: 14px;
+}
+.card-timestamp {
+    margin-bottom: 20px;
+    text-align: end;
+    color: #666;
+}
+.card-text {
+    color: #333;
+    line-height: 1.5;
+    margin: 5px;
+}
+.card-hashtag {
+    color: #3a57cd;
+    line-height: 1.5;
+    margin: 5px;
+}
+.card-link {
+    text-align: center;
+    padding: 10px;
+}
+.card-link a {
+    text-decoration: none;
+    color: #0bd;
+    margin: 0 10px;
+}
+.card-link a:hover {
+    color: #0090aa;
+}
+.card-author {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    color: #333;
+    border-top: 1px solid #ddd;
+    text-align: end;
+    padding-top: 10px;
+}
+.card-author img {
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    background-position: left top;
+    padding-right: 5px;
+}
+.LikesIcon-fa-heart{
+    font-size: 30px;
+}
