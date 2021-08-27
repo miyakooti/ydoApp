@@ -1,33 +1,37 @@
 window.addEventListener("load", async function () {
 
-    searchUser();
+  scanPostAndShowNewestPost();
 
 });
 
-function searchUser(id) {
-    console.log("ユーザー検索")
-    console.log(id)
-    const jsonData = {
-      OperationType: 'QUERY', Keys: {
-        userID: 1
-      }
-    }
-    fetch('https://s2cuqw4kb4.execute-api.ap-northeast-1.amazonaws.com/intern-groupB-usertable/usertable', {
-      method: 'POST', // or 'PUT'
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(jsonData),
+
+
+function scanPostAndShowNewestPost() {
+  console.log("投稿一覧取得")
+  const lists = document.getElementById("lists");
+  const jsonData = { OperationType: 'LATESHOW', };
+  fetch('https://vefjo6rdrl.execute-api.ap-northeast-1.amazonaws.com/intern-groupB-posttable/intern-groupb-posttable', {
+    method: 'POST', // or 'PUT'
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(jsonData),
+  })
+
+    .then(response => response.json())
+    .then(data => {
+
+      // item = data.Items[data.Items.length-1]
+
+
+      console.log(data[0].Items[0].sentence)
+      document.getElementById("card-timestamp").innerText = data[0].Items[0].timestamp
+      document.getElementById("card-text").innerText = data[0].Items[0].sentence
+
+
+
     })
-      .then(response => response.json())
-      .then(data => {
-        // 検索結果が複数の場合も対応できる。これは投稿で使う
-        data.Items.forEach(function (item) {
-          console.log('検索結果', item.user_name);
-          document.getElementById("userIDLabel").innerText = item.user_name
-        });
-      })
-      .catch((error) => {
-        console.error('Error:', error);
-      });
+    .catch((error) => {
+      console.error('Error:', error);
+    });
 }
