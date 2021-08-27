@@ -5,20 +5,6 @@ window.addEventListener("load", async function () {
 
 });
 
-
-document.getElementById("post0-button").onclick = function () {
-  window.sessionStorage.setItem("index", 0)
-}
-
-document.getElementById("post1-button").onclick = function () {
-  window.sessionStorage.setItem("index", 1)
-}
-
-document.getElementById("post2-button").onclick = function () {
-  window.sessionStorage.setItem("index", 2)
-}
-
-
 function scanPostAndShowNewestPost() {
   console.log("投稿一覧取得")
   const lists = document.getElementById("lists");
@@ -36,11 +22,13 @@ function scanPostAndShowNewestPost() {
 
       // item = data.Items[data.Items.length-1]
 
+      console.log("TESTTESTTESTTESTTESTTESTTEST")
+      index = window.sessionStorage.getItem("index");
+      console.log(index)
 
-      console.log(data[0].Items[0].sentence)
-      document.getElementById("card-text1").innerText = data[0].Items[0].sentence
-      document.getElementById("card-text2").innerText = data[1].Items[0].sentence
-      document.getElementById("card-text3").innerText = data[2].Items[0].sentence
+      const item = data[index].Items[0]
+      document.getElementById("time-stamp").innerText = item.timestamp
+      document.getElementById("card-text").innerText = item.sentence
 
 
 
