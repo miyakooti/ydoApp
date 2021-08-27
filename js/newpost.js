@@ -23,7 +23,7 @@ window.addEventListener("load", async function () {
 
 document.getElementById("post").onclick = function () {
   // searchUser(returnUserID)
-  searchUser("004")
+  searchUser("1")
 }
 
 
