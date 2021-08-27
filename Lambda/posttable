@@ -1,0 +1,124 @@
+import json
+import boto3
+from datetime import datetime as dt
+
+from boto3.dynamodb.conditions import Key	#Keyオブジェクトを利用できるようにする
+
+dynamodb = boto3.resource('dynamodb')	#Dynamodbアクセスのためのオブジェクト取得
+table = dynamodb.Table("intern-groupB-posts")	#指定テーブルのアクセスオブジェクト取得
+
+# テーブルスキャン
+def operation_scan():
+    scanData = table.scan()	#scan()メソッドでテーブル内をscan。一覧を取得
+    items=scanData['Items']	#応答からレコード一覧を抽出
+    print(items)	#レコード一覧を表示
+    return scanData
+
+# レコード検索
+def operation_query(partitionKey):
+    queryData = table.query(	#query()メソッドでテーブル内を検索
+        KeyConditionExpression = Key("postID").eq(partitionKey)	#検索キー(userID)を設定
+    )
+    items=queryData['Items']	#応答から取得レコードを抽出
+    print(items)	#取得レコードを表示
+    return queryData
+
+# レコード追加・更新
+def operation_put(partitionKey, userID, user_name, age, timestamp, image, sentence, image_icon, good):
+    print(partitionKey)
+    putResponse = table.put_item(	#put_item()メソッドで追加・更新レコードを設定
+        Item={	#追加・更新対象レコードのカラムリストを設定
+            'postID': partitionKey,
+            'userID': userID,
+            'user_name': user_name,
+            'age': age,
+            'timestamp': timestamp,
+            'image': image,
+            'sentence': sentence,
+            'image_icon': image_icon,
+            'good': good
+        }
+    )
+    if putResponse['ResponseMetadata']['HTTPStatusCode'] != 200:	#HTTPステータスコードが200 OKでないか判定
+        print(putResponse)	#エラーレスポンスを表示
+    else:
+        print('PUT Successed.')
+    return putResponse
+
+# レコード削除
+def operation_delete(partitionKey):
+    delResponse = table.delete_item(	#delete()メソッドで指定テーブルを削除
+       key={	#Keyオブジェクトで削除対象レコードのキー設定
+           'postID': partitionKey
+       }
+    )
+    if delResponse['ResponseMetadata']['HTTPStatusCode'] != 200:	#HTTPステータスコードが200 OKでないか判定
+        print(delResponse)	#エラーレスポンスを表示
+    else:
+        print('DEL Successed.')
+    return delResponse
+    
+# 最新3件表示
+def latest_show():
+    response = table.scan(Select='COUNT')
+    post = response['Count']
+    print(post)
+    querydatalist = []
+    for i in range(3):
+        queryData = table.query(	#query()メソッドでテーブル内を検索
+        KeyConditionExpression = Key("postID").eq(str(post-i))	#検索キー(postID)を設定
+        )
+        items=queryData['Items']	#応答から取得レコードを抽出
+        print(items)	#取得レコードを表示
+        querydatalist.append(queryData)
+    return querydatalist
+
+def detail():
+    response = table.scan(Select='COUNT')
+    post = response['Count']
+    print(post)
+    queryData = table.query(	#query()メソッドでテーブル内を検索
+    KeyConditionExpression = Key("postID").eq(str(post))	#検索キー(postID)を設定
+    )
+    items=queryData['Items']	#応答から取得レコードを抽出
+    print(items)	#取得レコードを表示
+    return queryData
+    
+
+def lambda_handler(event, context):	#Lambdaから最初に呼びされるハンドラ関数
+    print("Received event: " + json.dumps(event))	#引数：eventの内容を表示
+    tdt = dt.now()
+    OperationType = event['OperationType']	#引数から操作タイプを取得
+    try:
+        if OperationType == 'LATESHOW': #OperationTypeが'LATESHOW'か判定
+            return latest_show()
+        elif OperationType == 'DETAIL':
+            return detail()
+        elif OperationType == 'SCAN':	#OperationTypeが'SCAN'か判定
+            return operation_scan()
+        elif OperationType == 'PUT':	#OperationTypeが'PUT'か判定
+            response = table.scan(Select='COUNT')
+            post = response['Count'] +1
+            PostID = str(post)
+            print(PostID)
+            UserID = event['Keys']['userID']	#引数からuserIDの値を取得
+            User_name = event['Keys']['user_name']	#引数からuser_nameの値を取得
+            Age = event['Keys']['age']	#引数からageの値を取得
+            
+            Timestamp = tdt.strftime('%Y/%m/%d') #Timestampに日時を取得
+            #Timestamp = event['Keys']['timestamp']	#引数からtimestampの値を取得
+            
+            Image = event['Keys']['image']	#引数からimageの値を取得
+            Sentence = event['Keys']['sentence']	#引数からsentenceの値を取得
+            Image_icon = event['Keys']['image_icon']	#引数からimage_iconの値を取得
+            Good = event['Keys']['good']	#引数からgoodの値を取得
+            return operation_put(PostID, UserID, User_name, Age, Timestamp, Image, Sentence, Image_icon, Good)
+        PartitionKey = event['Keys']['postID']	#引数からDeviceIDの値を取得
+        if OperationType == 'QUERY':	#OperationTypeが'QUERY'か判定
+            return operation_query(PartitionKey)
+        elif OperationType == 'DELETE':	#OperationTypeが'DELETE'か判定
+            return operation_delete(PartitionKey)
+        
+    except Exception as e:
+        print("Error Exception.")
+        print(e)
