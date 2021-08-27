@@ -1,0 +1,148 @@
+* {
+	margin:0; padding:0; 		
+}
+.title{
+  padding-top: 2%;
+  font-size: 20px;
+}
+.cp_hr04 {
+	border-width: 3px 0 0 0;
+	border-style: double;
+	border-color: #4e8c48;
+}
+.title1{
+  margin-top: 5%;
+  text-align: center;
+  font-size: 30px;
+  text-decoration: underline;
+
+}
+.own-container{
+  
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.own-title{
+  width: 35%;
+  
+
+}
+.img-size{
+  width: 150px;
+  height: 100px;
+  position: center;
+}
+.own-intro{
+  background-color: grey;
+  height: 70px;
+}
+.own-box{
+  margin-top: 5%;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  background-color: honeydew;
+
+}
+
+
+
+.card {
+  position: center;
+  width: 350px;
+  margin: auto;
+  background: #fff;
+  border-radius: 5px;
+  box-shadow: 0 2px 5px #aaa;
+  animation: SlideIn 0.8s;
+}
+@keyframes SlideIn {
+  0% {
+      opacity: 0;
+      transform: translateX(20px);
+  }
+  100% {
+      opacity: 1;
+      transform: translateX(0);
+  }
+}
+.card img {
+  border-radius: 5px 5px 0 0;
+  max-width: 100%;
+  height: auto;
+  
+}
+.card-content {
+  height: 200px;
+  padding: 20px;
+  font-size: 14px;
+}
+.card-timestamp {
+  margin-bottom: 20px;
+  text-align: end;
+  color: #666;
+}
+.card-text {
+  color: #333;
+  line-height: 1.5;
+  margin: 5px;
+}
+.card-hashtag {
+  color: #3a57cd;
+  line-height: 1.5;
+  margin: 5px;
+}
+.card-link {
+  text-align: center;
+  padding: 10px;
+}
+.card-link a {
+  text-decoration: none;
+  color: #0bd;
+  margin: 0 10px;
+}
+.card-link a:hover {
+  color: #0090aa;
+}
+.card-author {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  color: #333;
+  border-top: 1px solid #ddd;
+  text-align: end;
+  padding-top: 10px;
+}
+.card-author img {
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  background-position: left top;
+  padding-right: 5px;
+  align-items: center;
+}
+.LikesIcon-fa-heart{
+  font-size: 30px;
+}
+.flex{
+  margin-top: 42%;
+  display:flex;
+  justify-content: space-between;
+
+}
+.flex > *{
+  width:33.3%;
+  background: #fff;
+  font-size: 64px;
+  text-align: center;
+}
+.abc{
+
+  width: 33%;
+  padding: 5%;
+  background    : #4e8c48; 
+  font-size     : 20pt;      
+  text-align    : center;    
+  
+}
