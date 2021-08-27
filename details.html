@@ -6,6 +6,7 @@
     <link rel="stylesheet" href="css/reset.css">
     <link rel="stylesheet" href="css/common.css">
     <link rel="stylesheet" href="css/login.css">
+    <link rel="stylesheet" href="css/tab.css">
     <link rel="stylesheet" href="css/details.css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.1/css/all.css">
     <style>
@@ -14,7 +15,7 @@
   <body>
     <div class="background">
       <div class="app-wrapper">
-        <a href="#" class="back-btn">
+        <a href="./search.html" class="back-btn">
             <i class="fa fa-chevron-left"></i>
             BACK
         </a>
@@ -36,20 +37,24 @@
                 </p>
                 <p class="card-link">
                     <a href="https://www.amazon.co.jp/%E3%82%B9%E3%82%BA%E6%9C%A8-%E7%89%87%E6%89%8B%E9%8D%8B-%E3%83%96%E3%83%A9%E3%83%83%E3%82%AF-%E5%B0%8F-7138-4325/dp/B075T23CXD/ref=asc_df_B075T23CXD/?tag=jpgo-22&linkCode=df0&hvadid=266498411432&hvpos=&hvnetw=g&hvrand=5038692547287392965&hvpone=&hvptwo=&hvqmt=&hvdev=c&hvdvcmdl=&hvlocint=&hvlocphy=1009461&hvtargid=pla-441433847401&psc=1&th=1&psc=1">
-                    スズ木さんのアヒージョ鍋</a>
+                    今回使った商品の紹介ページ</a>
                 </p>
                 <p class="card-author">
-                    <img src="image/gray-circle.png"
-                    alt="アイコン">
+                    <img src="image/gray-circle.png" alt="アイコン">
                     アウトドア太郎
                 </p>
             </div>
             
         </section>
-        <div id="card"></div>>
+        <div id="card"></div>
+        <div class="tab">
+            <input type="button" onclick="location.href='./own.html'" value="一覧" class="tab-content">
+            <input type="button" onclick="location.href='./new.html'" value="投稿" class="tab-content">
+            <input type="button" onclick="location.href='./search.html'" value="検索" class="tab-content">
+        </div>
 
       </div>
     </div>
-
+    
   </body>
   </html>
