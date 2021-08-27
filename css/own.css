@@ -49,6 +49,8 @@
 
 
 .card {
+  display: flex;
+  justify-content: space-between;
   position: center;
   width: 350px;
   margin: auto;
@@ -74,9 +76,16 @@
   
 }
 .card-content {
+
+  width: 50%;
   height: 200px;
   padding: 20px;
   font-size: 14px;
+}
+.time{
+  display: flex;
+   align-items: center; 
+   justify-content: space-between;
 }
 .card-timestamp {
   margin-bottom: 20px;
